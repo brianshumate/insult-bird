@@ -44,7 +44,7 @@ class InsultBird(TwitterBot):
         self.config['tweet_interval_range'] = None
 
         # only reply to tweets that specifically mention the bot
-        self.config['reply_direct_mention_only'] = True
+        self.config['reply_direct_mention_only'] = False
 
         # only include bot followers (and original tweeter) in @-replies
         self.config['reply_followers_only'] = False
@@ -79,161 +79,40 @@ class InsultBird(TwitterBot):
 
         # self.register_custom_handler(self.my_function, 60 * 60 * 24)
 
-def get_insult(self):
-    starters = ['You are nothing but', 'You are uglier than',
-        'You smell worse than', 'Your mother is', 'You remind me of',
-        'You have the consistency of', 'You look worse than',
-        'You are more foul than', 'You are more repulsive than' ]
-    nouns = ['bat toenails', 'bug spit', 'cat hair', 'fish heads', 'gunk',
-        'pond scum', 'rat retch', 'red dye number-9', 'Sun IPC manuals',
-        'waffle-house grits', 'yoo-hoo', 'squirrel guts', 'snake bait',
-        'buzzard gizzards', 'cat-hair-balls', 'pods', 'armadillo snouts',
-        'entrails', 'snake snot', 'eel ooze', 'toxic waste', 'Stimpy-drool',
-        'poopy', 'poop', 'craptacular carpet droppings', 'cold sores',
-        'chicken piss', 'dog vomit', 'dung', 'fat woman\'s stomach-bile',
-        'guano', 'dog balls', 'seagull puke', 'cat bladders', 'pus',
-        'urine samples', 'snake assholes', 'rat-farts', 'slurpee-backwash',
-        'jizzum', 'anal warts', 'ferret barf', 'troll nuggets', 'apple-johns',
-        'baggage', 'barnacles', 'bladders', 'boar-pigs', 'bugbears',
-        'bum-bailies', 'canker-blossums', 'clack-dishes', 'clotpoles',
-        'coxcomb', 'codpieces', 'death-tokens', 'dewberries', 'flap-dragons',
-        'flax-wenches', 'flirt-gills', 'foot-lickers', 'giglets', 'gudgeons',
-        'haggards', 'harpies', 'hedge-pigs', 'horn-beasts', 'hugger-muggers',
-        'joitheads', 'lewdsters', 'louts', 'maggot-pies', 'malt-worms',
-        'mammers', 'measles', 'minnows', 'miscreants', 'moldwarps',
-        'nut-hooks', 'pigeon-eggs', 'puttocks', 'pignuts', 'pumpkins',
-        'ratsbanes', 'scuts', 'skainsmates', 'strumpets', 'varlots',
-        'vassals', 'whey-faces', 'wagtails', 'bastiges', 'corksuckers',
-        'iceholes', 'dillholes', 'assfaces', 'asshats', 'assmunches',
-        'assclowns', 'asswipes', 'assholes', 'douchebags', 'dbags',
-        'pantywastes', 'schmucks', 'dillweeds', 'sleestaks', 'fuckfaces',
-        'fuckheads', 'fuckwits', 'fucktards', 'fuckers', 'bastards',
-        'sumbitches', 'bitches', 'fancypants', 'scabs', 'maggots',
-        'monkeyasses', 'monkey dandruff', 'monkey crabs', 'tits',
-        'tit-willows', 'taints', 'thumb-suckers', 'genital warts',
-        'donkey farts', 'lizard farts', 'fart trains', 'fartfaces',
-        'fart-quaffers', 'fart-blossoms', 'fart-willows', 'fart-winkles',
-        'shits', 'shit-stains', 'shitheads', 'shit for brains', 'shit-snorts',
-        'shit-sticks', 'cunts', 'cunnies', 'poons', 'meatheads', 'hippies',
-        'rednecks', 'yokels', 'hillbillies', 'city-slickers',
-        'metrosexuals', 'bubbas', 'nerds', 'geeks', 'dandies',
-        'wig-flippers',
-        ]
-    amounts = ['accumulation', 'bucket', 'gob', 'coagulation',
-        'half-mouthful', 'heap', 'mass', 'mound', 'petrification', 'pile',
-        'puddle', 'stack', 'thimbleful', 'tongueful', 'ooze', 'quart', 'bag',
-        'plate', 'enema-bucketful', 'ass-full', 'assload', 'shit ton',
-        'metric ass ton', 'metric fuck ton', 'metric shite tonne',
-        'cubic fuck', 'hectacre', 'doggy-bag', 'handful', 'dumptruck load',
-        'wheelbarrow load', 'glop', 'mason jar full', 'gallon',]
-    adjectives = ['acidic', 'antique', 'contemptible', 'culturally-unsound',
-        'despicable', 'evil', 'fermented', 'festering', 'foul', 'fulminating',
-        'humid', 'impure', 'inept', 'inferior', 'industrial', 'left-over',
-        'low-quality', 'off-color', 'petrified', 'pointy-nosed', 'salty',
-        'sausage-snorfling', 'tasteless', 'tempestuous', 'tepid',
-        'tofu-nibbling', 'unintelligent', 'unoriginal', 'uninspiring',
-        'weasel-smelling', 'wretched', 'spam-sucking', 'egg-sucking',
-        'decayed', 'halfbaked', 'infected', 'squishy', 'porous',
-        'pickled', 'thick', 'vapid', 'unmuzzled', 'bawdy', 'vain', 'lumpish',
-        'churlish', 'fobbing', 'craven', 'jarring', 'fly-bitten',
-        'fen-sucked', 'spongy', 'droning', 'gleeking', 'warped', 'currish',
-        'milk-livered', 'surly', 'mammering', 'ill-borne', 'beef-witted',
-        'tickle-brained', 'half-faced', 'headless', 'wayward', 'onion-eyed',
-        'beslubbering', 'villainous', 'lewd-minded', 'cockered',
-        'full-gorged', 'rude-snouted', 'crook-pated', 'pribbling',
-        'dread-bolted', 'fool-born', 'puny', 'fawning', 'sheep-biting',
-        'dankish', 'goatish', 'weather-bitten', 'knotty-pated', 'malt-wormy',
-        'saucyspleened', 'motley-mind', 'it-fowling', 'vassal-willed',
-        'loggerheaded', 'clapper-clawed', 'frothy', 'ruttish', 'clouted',
-        'common-kissing', 'folly-fallen', 'plume-plucked', 'flap-mouthed',
-        'swag-bellied', 'dizzy-eyed', 'gorbellied', 'weedy', 'reeky',
-        'measled', 'spur-galled', 'mangled', 'impertinent', 'bootless',
-        'toad-spotted', 'hasty-witted', 'horn-beat', 'yeasty', 'hedge-born',
-        'imp-bladdereddle-headed', 'tottering', 'hugger-muggered',
-        'elf-skinned', 'Microsoft-loving', 'pignutted', 'pox-marked', 'rank',
-        'malodorous', 'penguin-molesting', 'coughed-up', 'hacked-up',
-        'rump-fed', 'boil-brained', 'artless',]
-    starter = starters[random.randint(0, len(starters) - 1)]
-    adj1 = adjectives[random.randint(0, len(adjectives) - 1)]
-    adj2 = adjectives[random.randint(0, len(adjectives) - 1)]
-    noun = nouns[random.randint(0, len(nouns) - 1)]
-    amount = amounts[random.randint(0, len(amounts) - 1)]
-    if adj1 == adj2:
+    def get_insult(self):
+        starters = ['You are nothing but', 'You are uglier than',
+            'You smell worse than', 'Your mother is', 'You remind me of',
+            'You have the consistency of', 'You look worse than',
+            'You are more foul than', 'You are more repulsive than' ]
+        nouns = ['Stimpy-drool', 'Sun IPC manuals', 'anal warts', 'apple-johns', 'armadillo snouts', 'assclowns', 'assfaces', 'asshats', 'assholes', 'assmunches', 'asswipes', 'baggage', 'barnacles', 'bastards', 'bastiges', 'bat toenails', 'bitches', 'bladders', 'boar-pigs', 'bubbas', 'bug spit', 'bugbears', 'bum-bailies', 'buzzard gizzards', 'canker-blossums', 'cat bladders', 'cat hair', 'cat-hair-balls', 'chicken piss', 'city-slickers', 'clack-dishes', 'clotpoles', 'codpieces', 'cold sores', 'corksuckers', 'coxcomb', 'craptacular carpet droppings', 'cunnies', 'cunts', 'dandies', 'dbags', 'death-tokens', 'dewberries', 'dillholes', 'dillweeds', 'dog balls', 'dog vomit', 'donkey farts', 'douchebags', 'dung', 'eel ooze', 'entrails', 'fancypants', 'fart trains', 'fart-blossoms', 'fart-quaffers', 'fart-willows', 'fart-winkles', 'fartfaces', "fat woman's stomach-bile", 'ferret barf', 'fish heads', 'flap-dragons', 'flax-wenches', 'flirt-gills', 'foot-lickers', 'fuckers', 'fuckfaces', 'fuckheads', 'fucktards', 'fuckwits', 'geeks', 'genital warts', 'giglets', 'guano', 'gudgeons', 'gunk', 'haggards', 'harpies', 'hedge-pigs', 'hillbillies', 'hippies', 'horn-beasts', 'hugger-muggers', 'iceholes', 'jizzum', 'joitheads', 'lewdsters', 'lizard farts', 'louts', 'maggot-pies', 'maggots', 'malt-worms', 'mammers', 'measles', 'meatheads', 'metrosexuals', 'minnows', 'miscreants', 'moldwarps', 'monkey crabs', 'monkey dandruff', 'monkeyasses', 'nerds', 'nut-hooks', 'pantywastes', 'pigeon-eggs', 'pignuts', 'pods', 'pond scum', 'poons', 'poop', 'poopy', 'pumpkins', 'pus', 'puttocks', 'rat retch', 'rat-farts', 'ratsbanes', 'red dye number-9', 'rednecks', 'scabs', 'schmucks', 'scuts', 'seagull puke', 'shit for brains', 'shit-snorts', 'shit-stains', 'shit-sticks', 'shitheads', 'shits', 'skainsmates', 'sleestaks', 'slurpee-backwash', 'snake assholes', 'snake bait', 'snake snot', 'squirrel guts', 'strumpets', 'sumbitches', 'taints', 'thumb-suckers', 'tit-willows', 'tits', 'toxic waste', 'troll nuggets', 'urine samples', 'varlots', 'vassals', 'waffle-house grits', 'wagtails', 'whey-faces', 'wig-flippers', 'yokels', 'yoo-hoo']
+        amounts = ['accumulation', 'ass-full', 'assload', 'bag', 'bucket', 'coagulation', 'cubic fuck', 'doggy-bag', 'dumptruck load', 'enema-bucketful', 'gallon', 'glop', 'gob', 'half-mouthful', 'handful', 'heap', 'hectacre', 'mason jar full', 'mass', 'metric ass ton', 'metric fuck ton', 'metric shite tonne', 'mound', 'ooze', 'petrification', 'pile', 'plate', 'puddle', 'quart', 'shit ton', 'stack', 'thimbleful', 'tongueful', 'wheelbarrow load']
+        adjectives = ['Microsoft-loving', 'acidic', 'antique', 'artless', 'bawdy', 'beef-witted', 'beslubbering', 'boil-brained', 'bootless', 'churlish', 'clapper-clawed', 'clouted', 'cockered', 'common-kissing', 'contemptible', 'coughed-up', 'craven', 'crook-pated', 'culturally-unsound', 'currish', 'dankish', 'decayed', 'despicable', 'dizzy-eyed', 'dread-bolted', 'droning', 'egg-sucking', 'elf-skinned', 'evil', 'fawning', 'fen-sucked', 'fermented', 'festering', 'flap-mouthed', 'fly-bitten', 'fobbing', 'folly-fallen', 'fool-born', 'foul', 'frothy', 'full-gorged', 'fulminating', 'gleeking', 'goatish', 'gorbellied', 'hacked-up', 'half-faced', 'halfbaked', 'hasty-witted', 'headless', 'hedge-born', 'horn-beat', 'hugger-muggered', 'humid', 'ill-borne', 'imp-bladdereddle-headed', 'impertinent', 'impure', 'industrial', 'inept', 'infected', 'inferior', 'it-fowling', 'jarring', 'knotty-pated', 'left-over', 'lewd-minded', 'loggerheaded', 'low-quality', 'lumpish', 'malodorous', 'malt-wormy', 'mammering', 'mangled', 'measled', 'milk-livered', 'motley-mind', 'off-color', 'onion-eyed', 'penguin-molesting', 'petrified', 'pickled', 'pignutted', 'plume-plucked', 'pointy-nosed', 'porous', 'pox-marked', 'pribbling', 'puny', 'rank', 'reeky', 'rude-snouted', 'rump-fed', 'ruttish', 'salty', 'saucyspleened', 'sausage-snorfling', 'sheep-biting', 'spam-sucking', 'spongy', 'spur-galled', 'squishy', 'surly', 'swag-bellied', 'tasteless', 'tempestuous', 'tepid', 'thick', 'tickle-brained', 'toad-spotted', 'tofu-nibbling', 'tottering', 'uninspiring', 'unintelligent', 'unmuzzled', 'unoriginal', 'vain', 'vapid', 'vassal-willed', 'villainous', 'warped', 'wayward', 'weasel-smelling', 'weather-bitten', 'weedy', 'wretched', 'yeasty']
+        starter = starters[random.randint(0, len(starters) - 1)]
+        adj1 = adjectives[random.randint(0, len(adjectives) - 1)]
         adj2 = adjectives[random.randint(0, len(adjectives) - 1)]
-    if not adj1[0] in 'aeiou':
-        an = 'a'
-    else:
-        an = 'an'
-    return '%s %s %s %s of %s %s.' % (starter, an, adj1, amount, adj2, noun)
+        noun = nouns[random.randint(0, len(nouns) - 1)]
+        amount = amounts[random.randint(0, len(amounts) - 1)]
+        if adj1 == adj2:
+            adj2 = adjectives[random.randint(0, len(adjectives) - 1)]
+        if not adj1[0] in 'aeiou':
+            an = 'a'
+        else:
+            an = 'an'
+        return '%s %s %s %s of %s %s.' % (starter, an, adj1, amount, adj2, noun)
 
 
     def on_scheduled_tweet(self):
-        """
-        Make a public tweet to the bot's own timeline.
-
-        It's up to you to ensure that it's less than 140 characters.
-
-        Set tweet frequency in seconds with TWEET_INTERVAL in config.py.
-        """
         text = self.get_insult()
         self.post_tweet(text)
 
     def on_mention(self, tweet, prefix):
-        """
-        Defines actions to take when a mention is received.
 
-        tweet - a tweepy.Status object. You can access the text with
-        tweet.text
-
-        prefix - the @-mentions for this reply. No need to include this in the
-        reply string; it's provided so you can use it to make sure the value
-        you return is within the 140 character limit with this.
-
-        It's up to you to ensure that the prefix and tweet are less than 140
-        characters.
-
-        When calling post_tweet, you MUST include reply_to=tweet, or
-        Twitter won't count it as a reply.
-        """
         text = self.get_insult()
         prefixed_text = prefix + ' ' + text
         self.post_tweet(prefix + ' ' + text, reply_to=tweet)
 
-        # call this to fav the tweet!
-        # if something:
-        #     self.favorite_tweet(tweet)
 
     def on_timeline(self, tweet, prefix):
-        """
-        Defines actions to take on a timeline tweet.
-
-        tweet - a tweepy.Status object. You can access the text with
-        tweet.text
-
-        prefix - the @-mentions for this reply. No need to include this in the
-        reply string; it's provided so you can use it to make sure the value
-        you return is within the 140 character limit with this.
-
-        It's up to you to ensure that the prefix and tweet are less than 140
-        characters.
-
-        When calling post_tweet, you MUST include reply_to=tweet, or
-        Twitter won't count it as a reply.
-        """
-
-        """
-        text = self.get_insult()
-        prefixed_text = prefix + ' ' + text
-
-        # let's only reply 70% of the time, otherwise fave the twutt
-        def lucky(percent=70):
-            return random.randrange(100) < percent
-
-        if lucky():
-            self.post_tweet(prefix + ' ' + text, reply_to=tweet)
-        else:
-            self.favorite_tweet(tweet)
-        """
         pass
 
 if __name__ == '__main__':
