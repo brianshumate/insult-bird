@@ -89,10 +89,9 @@ class InsultBird(TwitterBot):
         with open("etc/amounts.json", 'r') as amountjson:
             amountlist = json.load(amountjson)
             amounts = amountlist["amountwords"]
-        starters = ['You are nothing but', 'You are uglier than',
-            'You smell worse than', 'Your mother is', 'You remind me of',
-            'You have the consistency of', 'You look worse than',
-            'You are more foul than', 'You are more repulsive than' ]
+        with open("etc/starters.json", 'r') as starterjson:
+            starterlist = json.load(starterjson)
+            starters = starterlist["starterterms"]
         starter = starters[random.randint(0, len(starters) - 1)]
         adj1 = adjectives[random.randint(0, len(adjectives) - 1)]
         adj2 = adjectives[random.randint(0, len(adjectives) - 1)]
