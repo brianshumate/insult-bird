@@ -37,7 +37,7 @@ class InsultBird(TwitterBot):
         ######################################
 
         # how often to tweet, in seconds
-        self.config['tweet_interval'] = 15 * 60     # 15 minutes
+        self.config['tweet_interval'] = 74 * 60     # 74 minutes
 
         # use this to define a (min, max) random range of how often to tweet
         # e.g., self.config['tweet_interval_range'] = (5*60, 10*60) # tweets every 5-10 minutes
@@ -80,13 +80,19 @@ class InsultBird(TwitterBot):
         # self.register_custom_handler(self.my_function, 60 * 60 * 24)
 
     def get_insult(self):
+        with open("etc/nouns.json", 'r') as noun:
+            nounlist = json.load(noun)
+            nouns = nounlist["nounwords"]
+        with open("etc/adjectives.json", 'r') as adjectivejson:
+            adjectivelist = json.load(adjectivejson)
+            adjectives = adjectivelist["adjectivewords"]
+        with open("etc/amounts.json", 'r') as amountjson:
+            amountlist = json.load(amountjson)
+             amounts = amountlist["amountwords"]
         starters = ['You are nothing but', 'You are uglier than',
             'You smell worse than', 'Your mother is', 'You remind me of',
             'You have the consistency of', 'You look worse than',
             'You are more foul than', 'You are more repulsive than' ]
-        nouns = ['Stimpy-drool', 'Sun IPC manuals', 'anal warts', 'apple-johns', 'armadillo snouts', 'assclowns', 'assfaces', 'asshats', 'assholes', 'assmunches', 'asswipes', 'baggage', 'barnacles', 'bastards', 'bastiges', 'bat toenails', 'bitches', 'bladders', 'boar-pigs', 'bubbas', 'bug spit', 'bugbears', 'bum-bailies', 'buzzard gizzards', 'canker-blossums', 'cat bladders', 'cat hair', 'cat-hair-balls', 'chicken piss', 'city-slickers', 'clack-dishes', 'clotpoles', 'codpieces', 'cold sores', 'corksuckers', 'coxcomb', 'craptacular carpet droppings', 'cunnies', 'cunts', 'dandies', 'dbags', 'death-tokens', 'dewberries', 'dillholes', 'dillweeds', 'dog balls', 'dog vomit', 'donkey farts', 'douchebags', 'dung', 'eel ooze', 'entrails', 'fancypants', 'fart trains', 'fart-blossoms', 'fart-quaffers', 'fart-willows', 'fart-winkles', 'fartfaces', "fat woman's stomach-bile", 'ferret barf', 'fish heads', 'flap-dragons', 'flax-wenches', 'flirt-gills', 'foot-lickers', 'fuckers', 'fuckfaces', 'fuckheads', 'fucktards', 'fuckwits', 'geeks', 'genital warts', 'giglets', 'guano', 'gudgeons', 'gunk', 'haggards', 'harpies', 'hedge-pigs', 'hillbillies', 'hippies', 'horn-beasts', 'hugger-muggers', 'iceholes', 'jizzum', 'joitheads', 'lewdsters', 'lizard farts', 'louts', 'maggot-pies', 'maggots', 'malt-worms', 'mammers', 'measles', 'meatheads', 'metrosexuals', 'minnows', 'miscreants', 'moldwarps', 'monkey crabs', 'monkey dandruff', 'monkeyasses', 'nerds', 'nut-hooks', 'pantywastes', 'pigeon-eggs', 'pignuts', 'pods', 'pond scum', 'poons', 'poop', 'poopy', 'pumpkins', 'pus', 'puttocks', 'rat retch', 'rat-farts', 'ratsbanes', 'red dye number-9', 'rednecks', 'scabs', 'schmucks', 'scuts', 'seagull puke', 'shit for brains', 'shit-snorts', 'shit-stains', 'shit-sticks', 'shitheads', 'shits', 'skainsmates', 'sleestaks', 'slurpee-backwash', 'snake assholes', 'snake bait', 'snake snot', 'squirrel guts', 'strumpets', 'sumbitches', 'taints', 'thumb-suckers', 'tit-willows', 'tits', 'toxic waste', 'troll nuggets', 'urine samples', 'varlots', 'vassals', 'waffle-house grits', 'wagtails', 'whey-faces', 'wig-flippers', 'yokels', 'yoo-hoo']
-        amounts = ['accumulation', 'ass-full', 'assload', 'bag', 'bucket', 'coagulation', 'cubic fuck', 'doggy-bag', 'dumptruck load', 'enema-bucketful', 'gallon', 'glop', 'gob', 'half-mouthful', 'handful', 'heap', 'hectacre', 'mason jar full', 'mass', 'metric ass ton', 'metric fuck ton', 'metric shite tonne', 'mound', 'ooze', 'petrification', 'pile', 'plate', 'puddle', 'quart', 'shit ton', 'stack', 'thimbleful', 'tongueful', 'wheelbarrow load']
-        adjectives = ['Microsoft-loving', 'acidic', 'antique', 'artless', 'bawdy', 'beef-witted', 'beslubbering', 'boil-brained', 'bootless', 'churlish', 'clapper-clawed', 'clouted', 'cockered', 'common-kissing', 'contemptible', 'coughed-up', 'craven', 'crook-pated', 'culturally-unsound', 'currish', 'dankish', 'decayed', 'despicable', 'dizzy-eyed', 'dread-bolted', 'droning', 'egg-sucking', 'elf-skinned', 'evil', 'fawning', 'fen-sucked', 'fermented', 'festering', 'flap-mouthed', 'fly-bitten', 'fobbing', 'folly-fallen', 'fool-born', 'foul', 'frothy', 'full-gorged', 'fulminating', 'gleeking', 'goatish', 'gorbellied', 'hacked-up', 'half-faced', 'halfbaked', 'hasty-witted', 'headless', 'hedge-born', 'horn-beat', 'hugger-muggered', 'humid', 'ill-borne', 'imp-bladdereddle-headed', 'impertinent', 'impure', 'industrial', 'inept', 'infected', 'inferior', 'it-fowling', 'jarring', 'knotty-pated', 'left-over', 'lewd-minded', 'loggerheaded', 'low-quality', 'lumpish', 'malodorous', 'malt-wormy', 'mammering', 'mangled', 'measled', 'milk-livered', 'motley-mind', 'off-color', 'onion-eyed', 'penguin-molesting', 'petrified', 'pickled', 'pignutted', 'plume-plucked', 'pointy-nosed', 'porous', 'pox-marked', 'pribbling', 'puny', 'rank', 'reeky', 'rude-snouted', 'rump-fed', 'ruttish', 'salty', 'saucyspleened', 'sausage-snorfling', 'sheep-biting', 'spam-sucking', 'spongy', 'spur-galled', 'squishy', 'surly', 'swag-bellied', 'tasteless', 'tempestuous', 'tepid', 'thick', 'tickle-brained', 'toad-spotted', 'tofu-nibbling', 'tottering', 'uninspiring', 'unintelligent', 'unmuzzled', 'unoriginal', 'vain', 'vapid', 'vassal-willed', 'villainous', 'warped', 'wayward', 'weasel-smelling', 'weather-bitten', 'weedy', 'wretched', 'yeasty']
         starter = starters[random.randint(0, len(starters) - 1)]
         adj1 = adjectives[random.randint(0, len(adjectives) - 1)]
         adj2 = adjectives[random.randint(0, len(adjectives) - 1)]
