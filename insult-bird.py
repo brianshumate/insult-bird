@@ -88,7 +88,7 @@ class InsultBird(TwitterBot):
             adjectives = adjectivelist["adjectivewords"]
         with open("etc/amounts.json", 'r') as amountjson:
             amountlist = json.load(amountjson)
-             amounts = amountlist["amountwords"]
+            amounts = amountlist["amountwords"]
         starters = ['You are nothing but', 'You are uglier than',
             'You smell worse than', 'Your mother is', 'You remind me of',
             'You have the consistency of', 'You look worse than',
