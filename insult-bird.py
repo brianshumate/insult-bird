@@ -120,7 +120,14 @@ class InsultBird(TwitterBot):
 
 
     def on_timeline(self, tweet, prefix):
-        pass
+        text = self.get_insult()
+        prefixed_text = prefix + ' ' + text
+
+        # let's only reply 10% of the time, otherwise walk the plank
+        if random.randrange(100) < 10:
+            self.post_tweet(prefix + ' ' + text, reply_to=tweet)
+        else:
+            pass
 
 if __name__ == '__main__':
     bot = InsultBird()
