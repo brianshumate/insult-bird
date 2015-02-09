@@ -120,6 +120,7 @@ class InsultBird(TwitterBot):
 
 
     def on_timeline(self, tweet, prefix):
+        """
         text = self.get_insult()
         prefixed_text = prefix + ' ' + text
 
@@ -127,7 +128,9 @@ class InsultBird(TwitterBot):
         if random.randrange(100) < 10:
             self.post_tweet(prefix + ' ' + text, reply_to=tweet)
         else:
-            pass
+        """
+
+        pass
 
 if __name__ == '__main__':
     bot = InsultBird()
