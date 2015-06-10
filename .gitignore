@@ -55,4 +55,10 @@ docs/_build/
 # pickles
 *.pkl
 
+# creds
 access.json
+
+# etc
+.idea
+.tm_properties
+

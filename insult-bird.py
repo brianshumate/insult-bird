@@ -9,7 +9,6 @@ from twitterbot import TwitterBot
 
 
 class InsultBird(TwitterBot):
-
     def bot_init(self):
         """
         Initialize and configure your bot!
@@ -37,25 +36,25 @@ class InsultBird(TwitterBot):
         ######################################
 
         # how often to tweet, in seconds
-        self.config['tweet_interval'] = 74 * 60     # 74 minutes
+        self.config['tweet_interval'] = 42 * 60  # 42 minutes
 
         # use this to define a (min, max) random range of how often to tweet
         # e.g., self.config['tweet_interval_range'] = (5*60, 10*60) # tweets every 5-10 minutes
 
         # Tweet range: every 74 to 240 minutes
-        self.config['tweet_interval_range'] = (74*60, 240*60)
+        self.config['tweet_interval_range'] = (42 * 60, 240 * 60)
 
         # only reply to tweets that specifically mention the bot
-        self.config['reply_direct_mention_only'] = False
+        self.config['reply_direct_mention_only'] = True
 
         # only include bot followers (and original tweeter) in @-replies
         self.config['reply_followers_only'] = False
 
         # fav any tweets that mention this bot?
-        self.config['autofav_mentions'] = False
+        self.config['autofav_mentions'] = True
 
         # fav any tweets containing these keywords?
-        self.config['autofav_keywords'] = ['pirate', 'robot pirate', 'yarrr']
+        self.config['autofav_keywords'] = ['pirate', 'robot', 'robot pirate', 'yarrr']
 
         # follow back all followers?
         self.config['autofollow'] = True
@@ -105,8 +104,7 @@ class InsultBird(TwitterBot):
             an = 'a'
         else:
             an = 'an'
-        return '%s %s %s %s of %s %s.' % (starter, an, adj1, amount, adj2, noun)
-
+        return "{starter} {aan} {adjective1} {amount} {adjective2} {noun}".format(starter=starter, aan=an, adjective1=adj1, amount=amount, adjective2=adj2, noun=noun)
 
     def on_scheduled_tweet(self):
         text = self.get_insult()
@@ -118,19 +116,19 @@ class InsultBird(TwitterBot):
         prefixed_text = prefix + ' ' + text
         self.post_tweet(prefix + ' ' + text, reply_to=tweet)
 
-
     def on_timeline(self, tweet, prefix):
+
         """
         text = self.get_insult()
         prefixed_text = prefix + ' ' + text
 
-        # let's only reply 10% of the time, otherwise walk the plank
-        if random.randrange(100) < 10:
+        # let's only reply 2% of the time, otherwise walk the plank
+        if random.randrange(100) < 2:
             self.post_tweet(prefix + ' ' + text, reply_to=tweet)
         else:
         """
-
         pass
+
 
 if __name__ == '__main__':
     bot = InsultBird()
