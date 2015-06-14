@@ -80,6 +80,9 @@ class InsultBird(TwitterBot):
 
         # self.register_custom_handler(self.my_function, 60 * 60 * 24)
 
+        # log path
+        self.config['log_path'] = '/home/bshumate/var/bot_logs/'
+
     def get_insult(self):
         with open("etc/nouns.json", 'r') as noun:
             nounlist = json.load(noun)
