@@ -6,6 +6,7 @@ import sys
 import re
 import random
 from twitterbot import TwitterBot
+from os.path import expanduser
 
 
 class InsultBird(TwitterBot):
@@ -81,7 +82,11 @@ class InsultBird(TwitterBot):
         # self.register_custom_handler(self.my_function, 60 * 60 * 24)
 
         # log path
-        self.config['log_path'] = '/home/bshumate/var/bot_logs/'
+        home = expanduser("~")
+        self.config['log_path'] = home + '/var/bot_logs/'
+
+        # what's up with reply interval?
+        self.config['reply_interval'] = 7 * 60
 
     def get_insult(self):
         with open("etc/nouns.json", 'r') as noun:
@@ -120,18 +125,14 @@ class InsultBird(TwitterBot):
         self.post_tweet(prefix + ' ' + text, reply_to=tweet)
 
     def on_timeline(self, tweet, prefix):
-
-        """
-        text = self.get_insult()
-        prefixed_text = prefix + ' ' + text
-
-        # let's only reply 2% of the time, otherwise walk the plank
-        if random.randrange(100) < 2:
-            self.post_tweet(prefix + ' ' + text, reply_to=tweet)
-        else:
-        """
         pass
-
+        """
+        if random.randrange(100) < 2:
+            text = self.get_insult()
+            self.post_tweet(text, reply_to=tweet)
+        else:
+            self.favorite_tweet(tweet)
+        """
 
 if __name__ == '__main__':
     bot = InsultBird()
