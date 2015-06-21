@@ -37,13 +37,13 @@ class InsultBird(TwitterBot):
         ######################################
 
         # how often to tweet, in seconds
-        self.config['tweet_interval'] = 42 * 60  # 42 minutes
+        self.config['tweet_interval'] = 74 * 60  # 74 minutes
 
         # use this to define a (min, max) random range of how often to tweet
         # e.g., self.config['tweet_interval_range'] = (5*60, 10*60) # tweets every 5-10 minutes
 
         # Tweet range: every 74 to 240 minutes
-        self.config['tweet_interval_range'] = (42 * 60, 240 * 60)
+        self.config['tweet_interval_range'] = (74 * 60, 240 * 60)
 
         # only reply to tweets that specifically mention the bot
         self.config['reply_direct_mention_only'] = True
