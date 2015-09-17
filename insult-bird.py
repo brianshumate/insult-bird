@@ -112,7 +112,7 @@ class InsultBird(TwitterBot):
             an = 'a'
         else:
             an = 'an'
-        return "{starter} {aan} {adjective1} {amount} {adjective2} {noun}".format(starter=starter, aan=an, adjective1=adj1, amount=amount, adjective2=adj2, noun=noun)
+        return "{starter} {aan} {adjective1} {amount} of {adjective2} {noun}".format(starter=starter, aan=an, adjective1=adj1, amount=amount, adjective2=adj2, noun=noun)
 
     def on_scheduled_tweet(self):
         text = self.get_insult()
