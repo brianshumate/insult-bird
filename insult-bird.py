@@ -37,13 +37,13 @@ class InsultBird(TwitterBot):
         ######################################
 
         # how often to tweet, in seconds
-        self.config['tweet_interval'] = 74 * 60  # 74 minutes
+        self.config['tweet_interval'] = 24 * 60  # 24 minutes
 
         # use this to define a (min, max) random range of how often to tweet
         # e.g., self.config['tweet_interval_range'] = (5*60, 10*60) # tweets every 5-10 minutes
 
         # Tweet range: every 74 to 240 minutes
-        self.config['tweet_interval_range'] = (74 * 60, 240 * 60)
+        self.config['tweet_interval_range'] = (24 * 60, 74 * 60)
 
         # only reply to tweets that specifically mention the bot
         self.config['reply_direct_mention_only'] = True
@@ -55,11 +55,10 @@ class InsultBird(TwitterBot):
         self.config['autofav_mentions'] = True
 
         # fav any tweets containing these keywords?
-        self.config['autofav_keywords'] = ['pirate', 'robot', 'robot pirate', 'yarrr']
+        self.config['autofav_keywords'] = []
 
         # follow back all followers?
         self.config['autofollow'] = True
-
 
         ###########################################
         # CUSTOM: your bot's own state variables! #
@@ -86,7 +85,7 @@ class InsultBird(TwitterBot):
         self.config['log_path'] = home + '/var/bot_logs/'
 
         # what's up with reply interval?
-        self.config['reply_interval'] = 7 * 60
+        self.config['reply_interval'] = 2 * 60
 
     def get_insult(self):
         with open("etc/nouns.json", 'r') as noun:
@@ -119,7 +118,6 @@ class InsultBird(TwitterBot):
         self.post_tweet(text)
 
     def on_mention(self, tweet, prefix):
-
         text = self.get_insult()
         prefixed_text = prefix + ' ' + text
         self.post_tweet(prefix + ' ' + text, reply_to=tweet)
