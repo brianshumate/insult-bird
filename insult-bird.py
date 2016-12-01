@@ -6,7 +6,7 @@ import sys
 import re
 import random
 from twitterbot import TwitterBot
-from os.path import expanduser
+# from os.path import expanduser
 
 
 class InsultBird(TwitterBot):
@@ -81,8 +81,8 @@ class InsultBird(TwitterBot):
         # self.register_custom_handler(self.my_function, 60 * 60 * 24)
 
         # log path
-        home = expanduser("~")
-        self.config['log_path'] = home + '/var/bot_logs/'
+        # home = expanduser("~")
+        self.config['log_path'] = '/home/brian/var/bot_logs/'
 
         # what's up with reply interval?
         self.config['reply_interval'] = 2 * 60
